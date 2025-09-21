@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* HSL variables follow shadcn style */
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  --muted: 220 14% 96%;
+  --card: 0 0% 100%;
+  --border: 214 32% 91%;
+  --brand: 250 83% 60%;
+  --brand-foreground: 210 40% 98%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: 222 47% 7%;
+    --foreground: 210 40% 98%;
+    --muted: 222 47% 11%;
+    --card: 222 47% 9%;
+    --border: 217 33% 17%;
+    --brand: 252 100% 69%;
+    --brand-foreground: 222 47% 11%;
+  }
+}
+
+html { scroll-behavior: smooth; }
+body {
+  @apply bg-background text-foreground antialiased;
+}
+
+/* Account for sticky header when jumping to anchors */
+:target { scroll-margin-top: 84px; }
+
+/* Focus styles */
+*:focus-visible { outline: 2px solid hsl(var(--brand)); outline-offset: 2px; }
+
+/* Simple prose utility */
+.prose-compact p { @apply leading-relaxed text-base text-foreground; }
