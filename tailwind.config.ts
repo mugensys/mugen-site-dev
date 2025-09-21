@@ -1,39 +1,37 @@
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
-  darkMode: ['class'],
+  darkMode: ["class"],
   content: [
-    './app/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
+    "./app/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}"
   ],
   theme: {
-    container: { center: true, padding: '1rem' },
     extend: {
-      fontFamily: {
-        sans: ['var(--font-epilogue)', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
-      },
       colors: {
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        muted: "hsl(var(--muted))",
         brand: {
-          orange: 'var(--brand-orange)',
-          surface: 'var(--surface)',
-          ink: 'var(--ink)',
-          border: 'var(--border)',
+          DEFAULT: "hsl(var(--brand))",
+          foreground: "hsl(var(--brand-foreground))",
         },
-        accent: {
-          cyan: 'var(--accent-cyan)',
-        }
+        card: "hsl(var(--card))",
+        border: "hsl(var(--border))",
+      },
+      container: {
+        center: true,
+        padding: "1rem",
+        screens: { "2xl": "1200px" }
       },
       boxShadow: {
-        soft: '0 6px 30px rgba(0,0,0,0.08)',
+        soft: "0 10px 30px rgba(0,0,0,0.08)",
       },
-      backgroundImage: {
-        'grid-dots': 'radial-gradient(currentColor 1px, transparent 1px)',
-      },
-      backgroundSize: {
-        'dot-sm': '14px 14px',
+      borderRadius: {
+        '2xl': '1rem'
       }
-    },
+    }
   },
-  plugins: [],
+  plugins: []
 }
 export default config

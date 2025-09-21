@@ -1,18 +1,13 @@
 'use client'
+import { Contact } from './Contact'
 
-import React from 'react'
-
-export const Footer: React.FC = () => {
+export function Footer() {
   return (
-    <footer className="border-t border-brand-border py-8">
-      <div className="container-max text-sm text-gray-600 flex flex-col md:flex-row items-center justify-between gap-2">
-        <p>&copy; {new Date().getFullYear()} Mugen Systems. All rights reserved.</p>
-        <nav aria-label="Footer" className="flex gap-4">
-          <a href="#why-mugen" className="hover:underline">Why Mugen</a>
-          <a href="#industries" className="hover:underline">Industries</a>
-          <a href="#services" className="hover:underline">Services</a>
-          <a href="#contact" className="hover:underline">Contact</a>
-        </nav>
+    <footer className="border-t border-border/60 bg-muted/30" role="contentinfo">
+      <Contact />
+      <div className="container mx-auto flex items-center justify-between py-6 text-sm text-foreground/70">
+        <p>© {new Date().getFullYear()} Mugen Systems. All rights reserved.</p>
+        <a href="#home" className="underline">Back to top</a>
       </div>
     </footer>
   )

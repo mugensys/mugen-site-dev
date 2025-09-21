@@ -1,67 +1,69 @@
 'use client'
-
-import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { useScrollSpy } from './ScrollSpyProvider'
-import { cn } from './ui/utils'
 import { Menu, X } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
-const NAV = [
-  { id: 'home', label: 'Home' },
-  { id: 'services', label: 'Services' },
-  { id: 'about', label: 'About Us' },
-  { id: 'contact', label: 'Contact' },
-]
-
-export const SiteHeader: React.FC = () => {
+export function SiteHeader() {
   const { activeId } = useScrollSpy()
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setOpen(false)
+    const onScroll = () => setScrolled(window.scrollY > 4)
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const nav = (
+    <ul className="flex flex-col gap-2 p-4 md:p-0 md:flex-row md:items-center md:gap-6">
+      {[
+        { id: 'home', label: 'Home' },
+        { id: 'services', label: 'Services' },
+        { id: 'about', label: 'About Us' },
+        { id: 'contact', label: 'Contact' }
+      ].map((item) => (
+        <li key={item.id}>
+          <Link
+            href={`#${item.id}`}
+            className={cn(
+              'rounded-xl px-2 py-1 text-sm font-medium hover:opacity-90 focus-visible:outline-none',
+              activeId === item.id ? 'text-brand' : 'text-foreground/80'
+            )}
+            aria-current={activeId === item.id ? 'page' : undefined}
+            onClick={() => setOpen(false)}
+          >
+            {item.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  )
+
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-brand-border">
-      <div className="container-max flex items-center justify-between h-[72px]">
-        <a href="#home" className="font-semibold text-lg">Mugen Systems</a>
-        <nav data-primary aria-label="Primary" className="hidden md:flex items-center gap-6">
-          {NAV.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              aria-current={activeId === item.id ? 'page' : undefined}
-              className={cn(
-                'text-sm font-medium transition-colors hover:text-gray-900',
-                activeId === item.id ? 'text-gray-900' : 'text-gray-600'
-              )}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-        <button aria-label="Open menu" className="md:hidden p-2" onClick={() => setOpen((v) => !v)}>
-          {open ? <X /> : <Menu />}
+    <header className={cn('sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur', scrolled && 'shadow-soft')}
+      role="banner">
+      <div className="container mx-auto flex h-16 items-center justify-between">
+        <Link href="#home" className="flex items-center gap-2 font-semibold">
+          <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-brand text-brand-foreground">μ</span>
+          <span>Mugen Systems</span>
+        </Link>
+        <nav aria-label="Primary" className="hidden md:block">{nav}</nav>
+        <button
+          className="md:hidden rounded-xl p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          aria-label="Toggle menu"
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
-      {/* Mobile drawer */}
-      {open && (
-        <div className="md:hidden border-t border-brand-border">
-          <nav aria-label="Primary" className="container-max py-2 flex flex-col">
-            {NAV.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                aria-current={activeId === item.id ? 'page' : undefined}
-                className={cn('px-2 py-3 text-base', activeId === item.id ? 'text-gray-900' : 'text-gray-700')}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-        </div>
-      )}
+      <div id="mobile-menu" className={cn('md:hidden', open ? 'block' : 'hidden')}>
+        {nav}
+      </div>
     </header>
   )
 }

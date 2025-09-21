@@ -1,30 +1,49 @@
 'use client'
-
-import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { motion } from 'framer-motion'
+import { ShieldCheck, BadgeCheck, PlugZap } from 'lucide-react'
 
-export const WhyMugen: React.FC = () => {
+export function WhyMugen() {
+  const items = [
+    {
+      icon: ShieldCheck,
+      title: 'Vendor‑neutral by design',
+      body: 'We don’t sell hardware. We align to your outcomes and pick the right tool for the job.'
+    },
+    {
+      icon: BadgeCheck,
+      title: 'Documented and transferable',
+      body: 'Runbooks, diagrams, and checklists so your team can operate with confidence.'
+    },
+    {
+      icon: PlugZap,
+      title: 'Built for reliability',
+      body: 'Observable, well‑tested networks with failure domains and graceful degradation.'
+    }
+  ]
+
   return (
-    <section id="why-mugen" className="section bg-gray-50">
-      <div className="container-max">
-        <div className="max-w-3xl">
-          <h2 className="text-2xl md:text-3xl font-bold">Vendor-Neutral by Design</h2>
-          <p className="mt-3 text-gray-700">
-            At Mugen Systems, we don’t sell hardware or take reseller incentives. We sell <strong>expertise</strong>. That keeps every design decision focused on best practices, protocol fit, and deployment strategy—advocating for your IT infrastructure, not a vendor catalog.
-          </p>
-        </div>
-        <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            'Independent architecture & design reviews',
-            'Standards-driven configurations and documentation',
-            'Lifecycle planning without lock-in',
-            'Transparent, measurable outcomes',
-          ].map((text, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.05 }}>
+    <section aria-labelledby="why" className="py-14">
+      <div className="container mx-auto">
+        <h2 id="why" className="mb-8 text-2xl font-semibold">Why Mugen?</h2>
+        <div className="grid gap-6 md:grid-cols-3">
+          {items.map(({ icon: Icon, title, body }, i) => (
+            <motion.div
+              key={title}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
+            >
               <Card>
-                <CardHeader><CardTitle className="text-base">Proof Point</CardTitle></CardHeader>
-                <CardContent className="text-sm text-gray-700">{text}</CardContent>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-3 text-xl">
+                    <Icon className="h-5 w-5 text-brand" /> {title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-foreground/80">{body}</p>
+                </CardContent>
               </Card>
             </motion.div>
           ))}

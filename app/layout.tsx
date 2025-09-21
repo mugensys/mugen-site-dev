@@ -1,69 +1,56 @@
-import './globals.css'
 import type { Metadata } from 'next'
 import { Epilogue } from 'next/font/google'
-import React from 'react'
+import './globals.css'
+import Script from 'next/script'
 
-const epilogue = Epilogue({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-epilogue',
-})
+const epilogue = Epilogue({ subsets: ['latin'], display: 'swap', variable: '--font-epilogue' })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://example.com'),
-  title: {
-    default: 'Mugen Systems — Network & IT Consulting',
-    template: '%s | Mugen Systems',
-  },
-  description: 'We design and deploy high-speed networks and provide comprehensive IT support so your business runs faster, safer, and smarter. Vendor-neutral by design.',
+  metadataBase: new URL('http://192.168.10.174/'),
+  title: 'Mugen Systems — Network & IT Consulting',
+  description: 'Vendor-neutral network and IT consulting. We design resilient architectures, optimize wireless, and de-risk cloud migrations across Southern California.',
   alternates: { canonical: '/' },
   openGraph: {
     title: 'Mugen Systems — Network & IT Consulting',
-    description: 'Vendor-neutral network & IT consulting in Southern California.',
-    url: 'https://example.com/',
-    siteName: 'Mugen Systems',
-    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Mugen Systems' }],
-    locale: 'en_US',
+    description: 'Vendor-neutral network and IT consulting serving Southern California.',
+    url: 'http://192.168.10.174/',
     type: 'website',
+    images: ['/og.png']
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Mugen Systems — Network & IT Consulting',
-    description: 'Vendor-neutral network & IT consulting in Southern California.',
-    images: ['/og.png'],
-  },
+    description: 'Vendor-neutral network and IT consulting serving Southern California.',
+    images: ['/og.png']
+  }
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={epilogue.variable}>
       <head>
-        {/* Preconnects for Google Fonts (ok for local testing) */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        {/* Preconnect while testing (safe even with next/font) */}
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        {/* JSON-LD for ProfessionalService */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ProfessionalService",
-              "name": "Mugen Systems",
-              "url": "https://example.com/",
-              "areaServed": "Southern California",
-              "contactPoint": [{
-                "@type": "ContactPoint",
-                "contactType": "sales",
-                "email": "hello@mugensystems.com",
-                "telephone": "(XXX) XXX-XXXX"
-              }]
-            })
-          }}
-        />
+        {/* JSON-LD: ProfessionalService */}
+        <Script id="jsonld" type="application/ld+json" strategy="beforeInteractive">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            name: "Mugen Systems",
+            url: "http://192.168.10.174/",
+            description: "Vendor-neutral network and IT consulting.",
+            areaServed: "Southern California",
+            image: "http://192.168.10.174/og.png",
+            contactPoint: {
+              "@type": "ContactPoint",
+              contactType: "sales",
+              email: "hello@mugensystems.example",
+              availableLanguage: ["English"]
+            }
+          })}
+        </Script>
       </head>
-      <body>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   )
 }

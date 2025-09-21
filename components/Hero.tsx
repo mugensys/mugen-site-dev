@@ -1,52 +1,59 @@
 'use client'
-
-import React from 'react'
 import { Button } from './ui/button'
-import { ChevronDown, ArrowUpRight } from 'lucide-react'
-import { motion } from 'framer-motion'
 import { MugenOrb } from './MugenOrb'
+import { motion, useReducedMotion } from 'framer-motion'
+import { ArrowRight } from 'lucide-react'
 
-export const Hero: React.FC = () => {
+export function Hero() {
+  const prefersReduced = useReducedMotion()
   return (
-    <section id="home" className="section">
-      <div className="container-max grid md:grid-cols-2 gap-10 items-center hero-bg">
-        <div>
-          <motion.h1
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-3xl md:text-5xl font-extrabold tracking-tight"
-          >
-            Transforming Businesses through Network & IT
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="mt-4 text-gray-700 text-lg"
-          >
-            We design and deploy high-speed networks and provide comprehensive IT support so your business runs faster, safer, and smarter. Our vendor-neutral approach means every recommendation serves your goals—not a sales quota.
-          </motion.p>
-          <div className="mt-8 flex items-center gap-3">
-            <Button asChild>
-              <a href="#contact" className="flex items-center">
-                Get a Consultation <ArrowUpRight className="ml-1 h-4 w-4" aria-hidden="true" />
-              </a>
+    <section className="relative overflow-hidden">
+      <div className="container mx-auto grid gap-10 py-24 md:grid-cols-2 md:gap-16">
+        <div className="prose-compact">
+          <h1 className="text-4xl font-bold leading-tight md:text-5xl">
+            Network & IT consulting that scales with you.
+          </h1>
+          <p className="mt-4 text-lg text-foreground/80">
+            We design resilient networks, optimize wireless experiences, and de‑risk cloud migrations—vendor‑neutral, outcome‑driven, and right‑sized for your team.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <Button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
+              Book a consult <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
-            <Button variant="outline" asChild>
-              <a href="#services">Our Services</a>
+            <Button variant="ghost" onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}>
+              Explore services
             </Button>
           </div>
-          <p className="mt-3 text-sm text-gray-500">Mugen Systems — Infinite possibilities. Practical solutions.</p>
-          <div className="mt-10 text-gray-600 flex items-center gap-2">
-            <ChevronDown className="h-5 w-5" aria-hidden="true" />
-            <span>Scroll to explore</span>
+          <div className="mt-8 grid grid-cols-3 gap-4 text-center text-sm">
+            <div>
+              <div className="text-2xl font-semibold">99.99%</div>
+              <div className="text-foreground/70">Target uptime</div>
+            </div>
+            <div>
+              <div className="text-2xl font-semibold">30–50%</div>
+              <div className="text-foreground/70">Faster Wi‑Fi</div>
+            </div>
+            <div>
+              <div className="text-2xl font-semibold"><span className="align-top text-base">≤</span>14 days</div>
+              <div className="text-foreground/70">To first value</div>
+            </div>
           </div>
         </div>
-        <div className="flex justify-center md:justify-end">
+        <div className="relative">
           <MugenOrb />
+          {!prefersReduced && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mt-6 rounded-2xl border border-border bg-card p-6 shadow-soft"
+            >
+              <p className="text-sm text-foreground/80">
+                "Mugen" (無限) means <strong>boundless</strong>. We bring that mindset to every architecture and engagement.
+              </p>
+            </motion.div>
+          )}
         </div>
       </div>
     </section>

@@ -1,37 +1,32 @@
 'use client'
-
-import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { motion } from 'framer-motion'
 
-export const Industries: React.FC = () => {
+export function Industries() {
   return (
-    <section id="industries" className="section">
-      <div className="container-max">
-        <h2 className="text-2xl md:text-3xl font-bold">Industries We Serve</h2>
-        <div className="mt-8 grid md:grid-cols-2 gap-6">
-          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <Card>
-              <CardHeader><CardTitle>Hospitality & Retail</CardTitle></CardHeader>
-              <CardContent className="text-gray-700 space-y-2 text-sm">
-                <p>Full <strong>high-density</strong> Wi-Fi and wired coverage, designed for peak occupancy</p>
-                <p>Seamless roaming for reliable voice, video, and point-of-sale</p>
-                <p>Guest access portals and captive portal integrations</p>
-                <p><strong>Video surveillance</strong> and smart alerts</p>
-              </CardContent>
-            </Card>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }}>
-            <Card>
-              <CardHeader><CardTitle>Office & Small Campus</CardTitle></CardHeader>
-              <CardContent className="text-gray-700 space-y-2 text-sm">
-                <p>Stable, secure networks that protect data and keep operations online</p>
-                <p>Robust wired and wireless for <strong>employees and guests</strong></p>
-                <p>Secure access: <strong>802.1X/RADIUS</strong>, MAB, and segmented guest access</p>
-                <p>Advanced <strong>firewall</strong>, <strong>VPN</strong>, and SD-WAN solutions</p>
-              </CardContent>
-            </Card>
-          </motion.div>
+    <section aria-labelledby="industries" className="py-14">
+      <div className="container mx-auto">
+        <h2 id="industries" className="mb-8 text-2xl font-semibold">Industries</h2>
+        <div className="grid gap-6 md:grid-cols-2">
+          {[{
+            title: 'Higher Ed & Public Sector',
+            body: 'Campus‑scale Wi‑Fi, secure remote access, and labs with zero‑trust guardrails.'
+          }, {
+            title: 'Manufacturing & Warehousing',
+            body: 'Deterministic networks for scanners and robots, OTA updates, and RF‑dense environments.'
+          }].map((card, i) => (
+            <motion.div key={card.title}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
+            >
+              <Card>
+                <CardHeader><CardTitle className="text-xl">{card.title}</CardTitle></CardHeader>
+                <CardContent><p className="text-foreground/80">{card.body}</p></CardContent>
+              </Card>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

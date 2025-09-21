@@ -1,36 +1,39 @@
 'use client'
-
-import React from 'react'
 import { motion } from 'framer-motion'
 
-export const About: React.FC = () => {
+export function About() {
   return (
-    <section id="about" className="section">
-      <div className="container-max grid md:grid-cols-2 gap-8">
+    <section id="about" data-section aria-labelledby="about-h" className="py-14">
+      <div className="container mx-auto grid gap-10 md:grid-cols-2">
         <div>
-          <h2 className="text-2xl md:text-3xl font-bold">About Us</h2>
-          <div className="mt-4 space-y-4 text-gray-700">
-            <div>
-              <h3 className="font-semibold">Our Vision</h3>
-              <p>We’re a dedicated partner for organizations navigating modern IT. With seasoned engineers and a commitment to clear, measurable results, we deliver resilient networks and responsive support that scale with your business across Southern California and beyond.</p>
-            </div>
-            <div>
-              <h3 className="font-semibold">What is “Mugen”?</h3>
-              <p><em>Mu·gen</em> (/MOO-gen/) means <strong>infinite</strong> in Japanese—reflecting our belief in continuous improvement and never settling for “good enough.”</p>
-            </div>
-          </div>
-          <div className="mt-8 grid grid-cols-3 gap-4">
-            {['Vendor-neutral', 'Standards-first', 'Measured outcomes'].map((s, i) => (
-              <motion.div key={s} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }} className="rounded-xl border border-brand-border p-4 text-center text-sm">
-                {s}
+          <h2 id="about-h" className="mb-4 text-2xl font-semibold">About Us</h2>
+          <p className="text-foreground/80">
+            Mugen Systems is an independent consulting studio specializing in networks, wireless, and cloud foundations. We partner with IT teams to turn fragile into resilient and slow into streamlined.
+          </p>
+          <div className="mt-6 grid grid-cols-3 gap-4 text-center">
+            {[{k:'Years', v:'10+'}, {k:'Projects', v:'120+'}, {k:'CSAT', v:'4.9/5'}].map(({k,v}, i) => (
+              <motion.div key={k} initial={{opacity:0, y:8}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.4, delay:i*0.05}}>
+                <div className="text-2xl font-semibold">{v}</div>
+                <div className="text-sm text-foreground/70">{k}</div>
               </motion.div>
             ))}
           </div>
         </div>
-        <div className="rounded-2xl border border-brand-border p-6 bg-white shadow-soft">
-          <h3 className="font-semibold">Industries & Capabilities</h3>
-          <p className="mt-2 text-sm text-gray-700">Hospitality, Retail, Offices, and Small Campus environments. Network design, security, endpoint management, and professional services tailored to your goals.</p>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="rounded-2xl border border-border bg-card p-6 shadow-soft prose-compact"
+        >
+          <h3 className="text-xl font-semibold">What is “Mugen”?</h3>
+          <p>
+            In Japanese, 無限 (mugen) means <em>infinite</em> or <em>boundless</em>. We bring this philosophy to systems—removing bottlenecks, eliminating single points of failure, and designing for growth.
+          </p>
+          <p>
+            Our process is simple: assess, architect, implement, and transfer. We leave you with documentation your team will actually use.
+          </p>
+        </motion.div>
       </div>
     </section>
   )

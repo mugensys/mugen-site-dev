@@ -1,9 +1,9 @@
 'use client'
-
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { Button } from './ui/button'
 import { ArrowUp } from 'lucide-react'
 
-export const BackToTop: React.FC = () => {
+export function BackToTop() {
   const [show, setShow] = useState(false)
   useEffect(() => {
     const onScroll = () => setShow(window.scrollY > 600)
@@ -13,12 +13,10 @@ export const BackToTop: React.FC = () => {
   }, [])
   if (!show) return null
   return (
-    <button
-      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      className="fixed bottom-5 right-5 rounded-full bg-brand-orange p-3 text-white shadow-soft"
-      aria-label="Back to top"
-    >
-      <ArrowUp className="h-5 w-5" aria-hidden="true" />
-    </button>
+    <div className="fixed bottom-6 right-6">
+      <Button aria-label="Back to top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        <ArrowUp className="mr-2 h-4 w-4" /> Top
+      </Button>
+    </div>
   )
 }
