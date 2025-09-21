@@ -1,28 +1,37 @@
-'use client';
-import * as React from 'react';
-import { cn } from '@/lib/utils';
+import * as React from 'react'
+import { Slot } from '@radix-ui/react-slot'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { cn } from './utils'
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'ghost';
-  size?: 'sm' | 'md' | 'lg';
+const buttonVariants = cva(
+  'inline-flex items-center justify-center gap-2 rounded-2xl text-sm font-semibold transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ring-offset-white disabled:opacity-50 disabled:cursor-not-allowed',
+  {
+    variants: {
+      variant: {
+        default: 'bg-brand-orange text-white hover:opacity-90',
+        outline: 'border border-brand-border text-gray-900 hover:bg-gray-50',
+        ghost: 'text-gray-900 hover:bg-gray-50',
+      },
+      size: {
+        default: 'h-11 px-5',
+        lg: 'h-12 px-6 text-base',
+        sm: 'h-9 px-4 text-sm',
+      },
+    },
+    defaultVariants: { variant: 'default', size: 'default' },
+  }
+)
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant='primary', size='md', ...props }, ref) => {
-    const base = 'inline-flex items-center justify-center rounded-2xl font-medium transition shadow-soft focus-visible:outline-none disabled:opacity-50 disabled:cursor-not-allowed border';
-    const variants = {
-      primary: 'bg-brand text-white border-transparent hover:opacity-90 focus-visible:ring-2 ring-offset-2 ring-brand',
-      secondary: 'bg-transparent text-fg border-border hover:bg-white/60',
-      ghost: 'bg-transparent text-fg border-transparent hover:bg-white/70',
-    } as const;
-    const sizes = {
-      sm: 'h-9 px-3 text-sm',
-      md: 'h-11 px-5',
-      lg: 'h-12 px-6 text-lg',
-    } as const;
-    return (
-      <button ref={ref} className={cn(base, variants[variant], sizes[size], className)} {...props} />
-    );
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : 'button'
+    return <Comp className={cn(buttonVariants({ variant, size }), className)} ref={ref} {...props} />
   }
-);
-Button.displayName = 'Button';
+)
+Button.displayName = 'Button'

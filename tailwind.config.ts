@@ -1,38 +1,39 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss'
+
 const config: Config = {
-  darkMode: ["class"],
+  darkMode: ['class'],
   content: [
-    "./app/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
+    './app/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
   ],
   theme: {
-    container: { center: true, padding: "1rem", screens: { "2xl": "1280px" } },
+    container: { center: true, padding: '1rem' },
     extend: {
-      fontFamily: { sans: ["var(--font-epilogue)", "system-ui", "ui-sans-serif", "Segoe UI", "Roboto", "Apple Color Emoji", "Noto Color Emoji"] },
+      fontFamily: {
+        sans: ['var(--font-epilogue)', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+      },
       colors: {
-        bg: "hsl(var(--bg))",
-        fg: "hsl(var(--fg))",
-        muted: "hsl(var(--muted))",
-        brand: "hsl(var(--brand))",
-        accent: "hsl(var(--accent))",
-        card: "hsl(var(--card))",
-        border: "hsl(var(--border))",
+        brand: {
+          orange: 'var(--brand-orange)',
+          surface: 'var(--surface)',
+          ink: 'var(--ink)',
+          border: 'var(--border)',
+        },
+        accent: {
+          cyan: 'var(--accent-cyan)',
+        }
       },
       boxShadow: {
-        soft: "0 10px 30px rgba(0,0,0,0.06)",
-      },
-      borderRadius: {
-        xl: "1rem",
-        "2xl": "1.25rem",
+        soft: '0 6px 30px rgba(0,0,0,0.08)',
       },
       backgroundImage: {
-        "dot-grid": "radial-gradient(currentColor 0.75px, transparent 0.75px)",
+        'grid-dots': 'radial-gradient(currentColor 1px, transparent 1px)',
       },
       backgroundSize: {
-        "dot-grid": "16px 16px",
+        'dot-sm': '14px 14px',
       }
     },
   },
   plugins: [],
-};
-export default config;
+}
+export default config

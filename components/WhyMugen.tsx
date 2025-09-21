@@ -1,38 +1,35 @@
-'use client';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { motion } from 'framer-motion';
-import { ShieldCheck, BookText, Workflow, BarChart3 } from 'lucide-react';
+'use client'
 
-export default function WhyMugen() {
-  const items = [
-    { icon: ShieldCheck, text: 'Independent architecture & design reviews' },
-    { icon: BookText, text: 'Standards-driven configurations and documentation' },
-    { icon: Workflow, text: 'Lifecycle planning without lock-in' },
-    { icon: BarChart3, text: 'Transparent, measurable outcomes' },
-  ] as const;
+import React from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
+import { motion } from 'framer-motion'
 
+export const WhyMugen: React.FC = () => {
   return (
-    <section id="why" aria-labelledby="why-title" className="section">
-      <div className="container">
+    <section id="why-mugen" className="section bg-gray-50">
+      <div className="container-max">
         <div className="max-w-3xl">
-          <h2 id="why-title" className="text-2xl md:text-3xl font-bold">Vendor-Neutral by Design</h2>
-          <p className="lead mt-3">
+          <h2 className="text-2xl md:text-3xl font-bold">Vendor-Neutral by Design</h2>
+          <p className="mt-3 text-gray-700">
             At Mugen Systems, we don’t sell hardware or take reseller incentives. We sell <strong>expertise</strong>. That keeps every design decision focused on best practices, protocol fit, and deployment strategy—advocating for your IT infrastructure, not a vendor catalog.
           </p>
         </div>
-        <div className="grid md:grid-cols-2 gap-4 mt-8">
-          {items.map((it, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i*0.05 }}>
+        <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            'Independent architecture & design reviews',
+            'Standards-driven configurations and documentation',
+            'Lifecycle planning without lock-in',
+            'Transparent, measurable outcomes',
+          ].map((text, i) => (
+            <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.05 }}>
               <Card>
-                <CardHeader className="flex flex-row items-center gap-3">
-                  <it.icon className="h-6 w-6 text-accent" aria-hidden />
-                  <CardTitle className="text-base">{it.text}</CardTitle>
-                </CardHeader>
+                <CardHeader><CardTitle className="text-base">Proof Point</CardTitle></CardHeader>
+                <CardContent className="text-sm text-gray-700">{text}</CardContent>
               </Card>
             </motion.div>
           ))}
         </div>
       </div>
     </section>
-  );
+  )
 }

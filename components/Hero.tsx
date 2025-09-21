@@ -1,41 +1,54 @@
-'use client';
-import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
-import MugenOrb from './MugenOrb';
+'use client'
 
-export default function Hero() {
+import React from 'react'
+import { Button } from './ui/button'
+import { ChevronDown, ArrowUpRight } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { MugenOrb } from './MugenOrb'
+
+export const Hero: React.FC = () => {
   return (
-    <section id="home" data-section label="Home" className="section relative overflow-hidden">
-      <a className="sr-only focus:not-sr-only absolute left-4 top-4 z-50 kbd" href="#main">Skip to content</a>
-      <div className="absolute inset-0 hero-bg" aria-hidden />
-      <div className="container relative">
-        <div className="max-w-3xl space-y-6">
+    <section id="home" className="section">
+      <div className="container-max grid md:grid-cols-2 gap-10 items-center hero-bg">
+        <div>
           <motion.h1
-            initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-4xl md:text-5xl/tight lg:text-6xl/tight font-extrabold tracking-tight"
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-3xl md:text-5xl font-extrabold tracking-tight"
           >
             Transforming Businesses through Network & IT
           </motion.h1>
           <motion.p
-            initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            transition={{ delay: 0.1, duration: 0.5 }}
-            className="lead"
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mt-4 text-gray-700 text-lg"
           >
             We design and deploy high-speed networks and provide comprehensive IT support so your business runs faster, safer, and smarter. Our vendor-neutral approach means every recommendation serves your goals—not a sales quota.
           </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            transition={{ delay: 0.15, duration: 0.5 }}
-            className="flex gap-3"
-          >
-            <Button asChild size="lg"><a href="#contact">Get a Consultation</a></Button>
-            <Button asChild variant="secondary" size="lg"><a href="#services">Our Services</a></Button>
-          </motion.div>
-          <p className="text-sm text-muted pt-2">Mugen Systems — Infinite possibilities. Practical solutions.</p>
+          <div className="mt-8 flex items-center gap-3">
+            <Button asChild>
+              <a href="#contact" className="flex items-center">
+                Get a Consultation <ArrowUpRight className="ml-1 h-4 w-4" aria-hidden="true" />
+              </a>
+            </Button>
+            <Button variant="outline" asChild>
+              <a href="#services">Our Services</a>
+            </Button>
+          </div>
+          <p className="mt-3 text-sm text-gray-500">Mugen Systems — Infinite possibilities. Practical solutions.</p>
+          <div className="mt-10 text-gray-600 flex items-center gap-2">
+            <ChevronDown className="h-5 w-5" aria-hidden="true" />
+            <span>Scroll to explore</span>
+          </div>
+        </div>
+        <div className="flex justify-center md:justify-end">
+          <MugenOrb />
         </div>
       </div>
-      <MugenOrb />
     </section>
-  );
+  )
 }

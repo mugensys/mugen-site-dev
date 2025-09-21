@@ -1,48 +1,39 @@
-'use client';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { motion } from 'framer-motion';
-import { Building2, Store } from 'lucide-react';
+'use client'
 
-export default function Industries() {
+import React from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
+import { motion } from 'framer-motion'
+
+export const Industries: React.FC = () => {
   return (
-    <section aria-labelledby="industries-title" className="section">
-      <div className="container">
-        <h2 id="industries-title" className="text-2xl md:text-3xl font-bold">Industries We Serve</h2>
-        <div className="grid md:grid-cols-2 gap-6 mt-6">
-          <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+    <section id="industries" className="section">
+      <div className="container-max">
+        <h2 className="text-2xl md:text-3xl font-bold">Industries We Serve</h2>
+        <div className="mt-8 grid md:grid-cols-2 gap-6">
+          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <Card>
-              <CardHeader className="flex flex-row items-center gap-3">
-                <Store className="h-6 w-6 text-accent" />
-                <CardTitle>Hospitality & Retail</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2 text-sm text-muted">
-                <ul className="list-disc pl-5 space-y-1">
-                  <li>Full <strong>high-density</strong> Wi-Fi and wired coverage, designed for peak occupancy</li>
-                  <li>Seamless roaming for reliable voice, video, and point-of-sale</li>
-                  <li>Guest access portals and captive portal integrations</li>
-                  <li><strong>Video surveillance</strong> and smart alerts</li>
-                </ul>
+              <CardHeader><CardTitle>Hospitality & Retail</CardTitle></CardHeader>
+              <CardContent className="text-gray-700 space-y-2 text-sm">
+                <p>Full <strong>high-density</strong> Wi-Fi and wired coverage, designed for peak occupancy</p>
+                <p>Seamless roaming for reliable voice, video, and point-of-sale</p>
+                <p>Guest access portals and captive portal integrations</p>
+                <p><strong>Video surveillance</strong> and smart alerts</p>
               </CardContent>
             </Card>
           </motion.div>
-          <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }}>
+          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }}>
             <Card>
-              <CardHeader className="flex flex-row items-center gap-3">
-                <Building2 className="h-6 w-6 text-accent" />
-                <CardTitle>Office & Small Campus</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2 text-sm text-muted">
-                <ul className="list-disc pl-5 space-y-1">
-                  <li>Stable, secure networks that protect data and keep operations online</li>
-                  <li>Robust wired and wireless for <strong>employees and guests</strong></li>
-                  <li>Secure access: <strong>802.1X/RADIUS</strong>, MAB, and segmented guest access</li>
-                  <li>Advanced <strong>firewall</strong>, <strong>VPN</strong>, and SD-WAN solutions</li>
-                </ul>
+              <CardHeader><CardTitle>Office & Small Campus</CardTitle></CardHeader>
+              <CardContent className="text-gray-700 space-y-2 text-sm">
+                <p>Stable, secure networks that protect data and keep operations online</p>
+                <p>Robust wired and wireless for <strong>employees and guests</strong></p>
+                <p>Secure access: <strong>802.1X/RADIUS</strong>, MAB, and segmented guest access</p>
+                <p>Advanced <strong>firewall</strong>, <strong>VPN</strong>, and SD-WAN solutions</p>
               </CardContent>
             </Card>
           </motion.div>
         </div>
       </div>
     </section>
-  );
+  )
 }
